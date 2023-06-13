@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>샐러드 선택</title>
+</head>
+<body>
+  <h1>샐러드 선택</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="salad_schoice">샐러드를 먹을까요?</label>
+    <input type="radio" id="salad_choice_yes" name="salad_choice" value="yes" required>
+    <label for="salad_choice_yes">예</label>
+    <input type="radio" id="salad_choice_no" name="salad_choice" value="no" required>
+    <label for="salad_choice_no">아니오</label>
+    <button type="submit">선택</button>
+  </form>
+
+  <div>
+    <ul> 
+      {% for usr in users %}
+        {% if usr.choice_date == now %}
+          
+          <li>{{ usr.username }} 님의 샐러드 먹는지 여부: {{ usr.is_salad }}</li>
+        {% endif%}
+      {% endfor %}
+    </ul>
+  </div>
+  <a href="{% url 'user:login'%}">메인페이지</a>
+
+</body>
+</html>
